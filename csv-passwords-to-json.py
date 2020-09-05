@@ -30,7 +30,10 @@ with open(outpt, "r+") as jsonfile: # noqa
         fileindex = 0
         for pas in passes:
             fileindex += 1
-            os.system("clear")
+            if "win" in sys.platform:
+                os.system("cls")
+            else:
+                os.system("clear")
             print(f"Progress: {(fileindex / len(passes)) * 100}%")
             pas = pas.split(",")
             if pas == [""]:
