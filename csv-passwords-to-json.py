@@ -1,5 +1,6 @@
 import json
 import sys
+import os
 
 sys.argv.pop(0)
 try:
@@ -7,10 +8,16 @@ try:
 except IndexError:
     print("Provide the input file")
     quit()
+if inpt not in os.listdir(): # noqa
+    print("Move the CSV file into the script directory")
+    quit()
 try:
     outpt = sys.argv[1]
 except IndexError:
     print("Provide the output file")
+    quit()
+if outpt not in os.listdir(): # noqa
+    print("Create the JSON file or move it into the script directory")
     quit()
 
 with open(outpt, "r+") as jsonfile: # noqa
@@ -18,8 +25,13 @@ with open(outpt, "r+") as jsonfile: # noqa
     jsonfile.write("")
     with open(inpt, "r") as csvfile: # noqa
         passes = csvfile.read().split("\n")
-        passes.pop(0)
+        if passes[0] == "name,url,username,password":
+            passes.pop(0)
+        fileindex = 0
         for pas in passes:
+            fileindex += 1
+            os.system("clear")
+            print(f"Progress: {(fileindex / len(passes)) * 100}%")
             pas = pas.split(",")
             if pas == [""]:
                 continue
