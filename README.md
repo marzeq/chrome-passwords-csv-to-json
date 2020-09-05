@@ -1,5 +1,5 @@
 # chrome-passwords-csv-to-json
-### This converts your Chrome passwords into a nice and human-readable JSON file
+### This converts your Chrome (and other Chromium based browsers) passwords into a nice and human-readable JSON file
 
 ---
 
